@@ -1,0 +1,23 @@
+version: '3'
+services:
+  
+  lineage-tracker:
+    container_name: lineage-tracker
+    image: lineage-tracker
+    ports:
+      - 8080:8080
+    environment:
+      - VIRTUOSO_HOST=http://lineage-information-store:8890
+      - LOG_LEVEL=DEBUG
+      - SWAGGER_SWAGGER_URL=
+      - SWAGGER_API_URL=/static/swagger.json
+      - CLIENT_ID=pistis-test-only
+      - CLIENT_SECRET=DYuAlXn8kC1SVzFiYgApfjcodZhdxreL
+
+  lineage-information-store:
+    container_name: lineage-information-store
+    image: openlink/virtuoso-opensource-7
+    ports:
+      - 8890:8890
+    environment:
+      - DBA_PASSWORD=dba

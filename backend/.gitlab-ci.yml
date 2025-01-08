@@ -1,0 +1,42 @@
+stages:
+  - register
+  - deploy
+
+register as latest:
+  stage: register
+  tags:
+    - dind
+  image: docker:latest
+  variables:
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+  only:
+    - develop
+  script:
+    - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
+    - docker build --pull -t $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+# deploy to openshift:
+#   stage: deploy
+#   image: ebits/openshift-client
+#   only:
+#     refs:
+#       - develop
+#       - main
+#       - develop_deploy
+#     variables:
+#       - $OPENSHIFT_SERVER
+#       - $OPENSHIFT_TOKEN
+#       - $OPENSHIFT_DOMAIN
+#   tags:
+#     - docker
+#   environment:
+#     name: Testing
+#   script:
+#     - oc login "$OPENSHIFT_SERVER" --token="$OPENSHIFT_TOKEN" --insecure-skip-tls-verify
+#     - oc import-image $CI_PROJECT_NAME --from=$CI_REGISTRY_IMAGE --confirm
+#     - oc get services $CI_PROJECT_NAME 2> /dev/null || oc new-app --name=$CI_PROJECT_NAME --image-stream=$CI_PROJECT_NAME --allow-missing-imagestream-tags
+#     - oc get routes $CI_PROJECT_NAME 2> /dev/null || oc create route edge --service=$CI_PROJECT_NAME --hostname=$CI_PROJECT_NAME-$OPENSHIFT_DOMAIN --insecure-policy=Redirect --port=8080
+

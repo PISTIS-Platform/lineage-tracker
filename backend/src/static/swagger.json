@@ -1,0 +1,837 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Lineage Tracker",
+    "description": "This API includes all endpoints for the PISTIS Lineage Tracker, which monitors the evolution of datasets within the PISTIS ecosystem. Specifically, all CRUD operations on a dataset are documented, and the resulting dataset's family tree, lineage, history, and status can be tracked."
+  },
+  "servers": [
+    {
+      "url": "https://develop.pistis-market.eu/srv/lineage-tracker/",
+      "description": "API server"
+    }
+  ],
+  "paths": {
+    "/create_dataset": {
+      "post": {
+        "tags": ["Operation Documentation"],
+        "security": [{"apiKeyAuth": []}],
+        "summary": "Document the creation of a new dataset in the Lineage Information Store.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OperationDescriptionCreate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Dataset creation successfully documented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Dataset creation successfully documented."
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid argument structure." },
+          "401": { "description": "Unauthorized access." },
+          "412": { "description": "Preconditions not fulfilled." }
+        }
+      }
+    },
+    "/update_dataset": {
+      "post": {
+        "tags": ["Operation Documentation"],
+        "security": [{"apiKeyAuth": []}],
+        "summary": "Document the update process for an existing dataset in the Lineage Information Store.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OperationDescriptionUpdate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Dataset update successfully documented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Dataset update successfully documented."
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid argument structure." },
+          "401": { "description": "Unauthorized access." },
+          "412": { "description": "Preconditions not fulfilled." }
+        }
+      }
+    },
+    "/read_dataset": {
+      "post": {
+        "tags": ["Operation Documentation"],
+        "security": [{"apiKeyAuth": []}],
+        "summary": "Document the reading of an existing dataset in the Lineage Information Store.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OperationDescriptionRead" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Dataset reading successfully documented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Dataset reading successfully documented."
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid argument structure." },
+          "401": { "description": "Unauthorized access." },
+          "412": { "description": "Preconditions not fulfilled." }
+        }
+      }
+    },
+    "/delete_dataset": {
+      "post": {
+        "tags": ["Operation Documentation"],
+        "security": [{"apiKeyAuth": []}],
+        "summary": "Document the deletion of an existing dataset in the Lineage Information Store.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OperationDescriptionDelete" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Dataset deletion successfully documented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Dataset deletion successfully documented."
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid argument structure." },
+          "401": { "description": "Unauthorized access." },
+          "412": { "description": "Preconditions not fulfilled." }
+        }
+      }
+    },
+    "/delete_family_tree": {
+      "post": {
+        "tags": ["Operation Documentation"],
+        "security": [{"apiKeyAuth": []}],
+        "summary": "Document the deletion of an existing dataset's entire family tree in the Lineage Information Store.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OperationDescriptionDelete" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Dataset family tree deletion successfully documented.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Dataset family tree deletion successfully documented."
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid argument structure." },
+          "401": { "description": "Unauthorized access." },
+          "412": { "description": "Preconditions not fulfilled." }
+        }
+      }
+    },
+    "/get_dataset_family_tree": {
+      "get": {
+        "tags": ["Information Retrieval"],
+        "security": [{"apiKeyAuth": []}],
+        "summary": "Retrieve the complete family tree of a dataset, showing the most recent operation performed.",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "123abc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dataset family tree retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FamilyTreeResponse" }
+              }
+            }
+          },
+          "400": { "description": "Invalid argument structure." },
+          "401": { "description": "Unauthorized access." },
+          "412": { "description": "Preconditions not fulfilled." }
+        }
+      }
+    },
+    "/get_dataset_lineage": {
+      "get": {
+        "tags": ["Information Retrieval"],
+        "security": [{"apiKeyAuth": []}],
+        "summary": "Retrieve the complete lineage of a dataset, showing the most recent operation performed.",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "123abc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dataset lineage retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LineageResponse" }
+              }
+            }
+          },
+          "400": { "description": "Invalid argument structure." },
+          "401": { "description": "Unauthorized access." },
+          "412": { "description": "Preconditions not fulfilled." }
+        }
+      }
+    },
+    "/get_dataset_history": {
+      "get": {
+        "tags": ["Information Retrieval"],
+        "security": [{"apiKeyAuth": []}],
+        "summary": "Retrieve the complete operation history associated with a dataset.",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "123abc"
+            }
+          },
+          {
+            "name": "user_group",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "FHG"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dataset history retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DatasetHistoryResponse" }
+              }
+            }
+          },
+          "400": { "description": "Invalid argument structure." },
+          "401": { "description": "Unauthorized access." },
+          "412": { "description": "Preconditions not fulfilled." }
+        }
+      }
+    },
+    "/get_dataset_status": {
+      "get": {
+        "tags": ["Information Retrieval"],
+        "security": [{"apiKeyAuth": []}],
+        "summary": "Retrieve the last operation performed on a dataset.",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "123abc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dataset status retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DatasetStatusResponse" }
+              }
+            }
+          },
+          "400": { "description": "Invalid argument structure." },
+          "401": { "description": "Unauthorized access." },
+          "412": { "description": "Preconditions not fulfilled." }
+        }
+      }
+    },
+    "/get_dataset_num_operations": {
+      "get": {
+        "tags": ["Information Retrieval"],
+        "security": [{"apiKeyAuth": []}],
+        "summary": "Retrieve the number of each type of operation performed on a dataset.",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "123abc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Number of operations retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DatasetNumOperationsResponse" }
+              }
+            }
+          },
+          "400": { "description": "Invalid argument structure." },
+          "401": { "description": "Unauthorized access." },
+          "412": { "description": "Preconditions not fulfilled." }
+        }
+      }
+    },
+    "/get_datasets_diff": {
+      "get": {
+        "tags": ["Information Retrieval"],
+        "security": [{"apiKeyAuth": []}],
+        "summary": "Retrieve the differences between two datasets, including added, deleted, and modified values.",
+        "parameters": [
+          {
+            "name": "uuid_1",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "123abc"
+            }
+          },
+          {
+            "name": "uuid_2",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "223abc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Datasets comparison successful.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DatasetsDiffResponse" }
+              }
+            }
+          },
+          "400": { "description": "Invalid argument structure." },
+          "401": { "description": "Unauthorized access." },
+          "412": { "description": "Preconditions not fulfilled." }
+        }
+      }
+    },
+    "/get_user_history": {
+      "get": {
+        "tags": ["Information Retrieval"],
+        "security": [{"apiKeyAuth": []}],
+        "summary": "Retrieve the complete history of operations performed by a user.",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "user1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User operation history retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserHistoryResponse" }
+              }
+            }
+          },
+          "400": { "description": "Invalid argument structure." },
+          "401": { "description": "Unauthorized access." },
+          "412": { "description": "Preconditions not fulfilled." }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operation Documentation",
+      "description": "Document an operation in the Lineage Information Store."
+    },
+    {
+      "name": "Information Retrieval",
+      "description": "Retrieve information from the Lineage Information Store."
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    },
+    "schemas": {
+      "OperationDescriptionCreate": {
+        "type": "object",
+        "required": ["username", "user_group", "uuid", "dataset_name"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "user1"
+          },
+          "user_group": {
+            "type": "string",
+            "example": "group1"
+          },
+          "uuid": {
+            "type": "string",
+            "example": "123abc"
+          },
+          "dataset_name": {
+            "type": "string",
+            "example": "random_name"
+          }
+        }
+      },
+      "OperationDescriptionUpdate": {
+        "type": "object",
+        "required": ["username", "user_group", "uuid", "uuid_prev", "update_description"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "user1"
+          },
+          "user_group": {
+            "type": "string",
+            "example": "group1"
+          },
+          "uuid": {
+            "type": "string",
+            "example": "223abc"
+          },
+          "uuid_prev": {
+            "type": "string",
+            "example": "123abc"
+          },
+          "update_description": {
+            "type": "string",
+            "example": "add_rows"
+          }
+        }
+      },
+      "OperationDescriptionRead": {
+        "type": "object",
+        "required": ["username", "user_group", "uuid"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "user1"
+          },
+          "user_group": {
+            "type": "string",
+            "example": "group1"
+          },
+          "uuid": {
+            "type": "string",
+            "example": "123abc"
+          }
+        }
+      },
+      "OperationDescriptionDelete": {
+        "type": "object",
+        "required": ["username", "user_group", "uuid"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "user1"
+          },
+          "user_group": {
+            "type": "string",
+            "example": "group1"
+          },
+          "uuid": {
+            "type": "string",
+            "example": "123abc"
+          }
+        }
+      },
+      "FamilyTreeResponse": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "username": {
+                "type": "string"
+              },
+              "user_group": {
+                "type": "string"
+              },
+              "dataset_name": {
+                "type": "string"
+              },
+              "operation_description": {
+                "type": "string"
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "derived_from": {
+                "type": "string",
+                "nullable": true
+              }
+            },
+            "required": ["username", "user_group", "dataset_name", "operation_description", "timestamp"]
+          }
+        },
+        "example": {
+          "lineage_id_1": {
+            "uuid1": {
+              "username": "user1",
+              "user_group": "group1",
+              "dataset_name": "dataset1",
+              "operation_description": "create",
+              "timestamp": "2023-02-16T09:38:59Z",
+              "derived_from": "None"
+            },
+            "uuid2": {
+              "username": "user1",
+              "user_group": "group1",
+              "dataset_name": "dataset2",
+              "operation_description": "update",
+              "timestamp": "2023-02-17T09:38:59Z",
+              "derived_from": "uuid1"
+            }
+          },
+          "lineage_id_2": {
+            "uuid3": {
+              "username": "user2",
+              "user_group": "group1",
+              "dataset_name": "dataset3",
+              "operation_description": "update",
+              "timestamp": "2023-02-16T09:38:59Z",
+              "derived_from": "uuid1"
+            }
+          }
+        }
+      },
+      "LineageResponse": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string"
+            },
+            "user_group": {
+              "type": "string"
+            },
+            "dataset_name": {
+              "type": "string"
+            },
+            "operation_description": {
+              "type": "string"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "derived_from": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "required": ["username", "user_group", "dataset_name", "operation_description", "timestamp"]
+        },
+        "example": {
+          "uuid2": {
+            "username": "user1",
+            "user_group": "group1",
+            "dataset_name": "dataset1",
+            "operation_description": "update",
+            "timestamp": "2023-02-16T09:38:59Z",
+            "derived_from": "uuid1"
+          },
+          "uuid1": {
+            "username": "user1",
+            "user_group": "group1",
+            "dataset_name": "dataset1",
+            "operation_description": "create",
+            "timestamp": "2023-02-15T09:32:59Z",
+            "derived_from": "uuid1"
+          }
+        }
+      },
+      "LineageId": {
+        "type": "object",
+        "required": ["username", "user_group", "dataset_name", "operation_description", "timestamp"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "user1"
+          },
+          "user_group": {
+            "type": "string",
+            "example": "group1"
+          },
+          "dataset_name": {
+            "type": "string",
+            "example": "dataset1"
+          },
+          "operation_description": {
+            "type": "string",
+            "example": "update"
+          },
+          "timestamp": {
+            "type": "string",
+            "example": "2023-02-16T09:38:59Z"
+          },
+          "derived_from": {
+            "type": "string",
+            "example": "uuid1"
+          }
+        }
+      },
+      "DatasetHistoryResponse": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "username": {
+                "type": "string",
+                "example": "user1"
+              },
+              "user_group": {
+                "type": "string",
+                "example": "group1"
+              },
+              "operation_description": {
+                "type": "string",
+                "example": "create"
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-02-16T09:38:59Z"
+              }
+            },
+            "required": ["username", "user_group", "operation_description", "timestamp"]
+          }
+        },
+        "example": {
+          "uuid": [
+            {
+              "username": "user1",
+              "user_group": "group1",
+              "operation_description": "create",
+              "timestamp": "2024-04-05T14:10:21Z"
+            },
+            {
+              "username": "user2",
+              "user_group": "group2",
+              "operation_description": "read",
+              "timestamp": "2024-04-05T14:10:23Z"
+            },
+            {
+              "username": "user1",
+              "user_group": "group1",
+              "operation_description": "delete",
+              "timestamp": "2024-04-05T14:10:24Z"
+            }
+          ]
+        }
+      },
+      "DatasetStatusResponse": {
+        "type": "object",
+        "required": ["uuid"],
+        "properties": {
+          "uuid": {
+            "$ref": "#/components/schemas/DatasetStatus"
+          }
+        }
+      },
+      "DatasetNumOperationsResponse": {
+        "type": "object",
+        "required": ["uuid"],
+        "properties": {
+          "uuid": {
+            "$ref": "#/components/schemas/DatasetNumOperations"
+          }
+        }
+      },
+      "DatasetStatus": {
+        "type": "object",
+        "required": ["username", "user_group", "operation_description", "timestamp"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "user1"
+          },
+          "user_group": {
+            "type": "string",
+            "example": "group1"
+          },
+          "operation_description": {
+            "type": "string",
+            "example": "update"
+          },
+          "timestamp": {
+            "type": "string",
+            "example": "2023-02-16T09:38:59Z"
+          }
+        }
+      },
+      "DatasetsDiff": {
+        "type": "object",
+        "required": ["dataset_1", "dataset_2", "diff"],
+        "properties": {
+          "dataset_1": {
+            "type": "string",
+            "example": "dataset_1"
+          },
+          "dataset_2": {
+            "type": "string",
+            "example": "dataset_2"
+          },
+          "diff": {
+            "type": "string",
+            "example": "diff"
+          }
+        }
+      },
+      "DatasetNumOperations": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        }
+      },
+      "UserHistoryResponse": {
+        "type": "object",
+        "required": ["username"],
+        "properties": {
+          "username": {
+            "$ref": "#/components/schemas/UserHistory"
+          }
+        }
+      },
+      "UserHistory": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dataset_name": {
+              "type": "string",
+              "example": "name"
+            },
+            "dataset_uuid": {
+              "type": "string",
+              "example": "random_uuid"
+            },
+            "operation_description": {
+              "type": "string",
+              "example": "create"
+            },
+            "timestamp": {
+              "type": "string",
+              "example": "2023-02-16T09:20:20Z"
+            }
+          }
+        },
+        "example": [
+          {
+            "dataset_name": "name1",
+            "dataset_uuid": "uuid1",
+            "operation_description": "create",
+            "timestamp": "2023-02-16T09:20:20Z"
+          },
+          {
+            "dataset_name": "name2",
+            "dataset_uuid": "uuid2",
+            "operation_description": "create",
+            "timestamp": "2023-02-16T09:38:59Z"
+          },
+          {
+            "dataset_name": "name1",
+            "dataset_uuid": "uuid1",
+            "operation_description": "read",
+            "timestamp": "2023-02-16T09:52:18Z"
+          },
+          {
+            "dataset_name": "name3",
+            "dataset_uuid": "uuid3",
+            "operation_description": "update",
+            "timestamp": "2023-02-16T09:54:12Z"
+          },
+          {
+            "dataset_name": "name3",
+            "dataset_uuid": "uuid3",
+            "operation_description": "read",
+            "timestamp": "2023-02-16T13:03:24Z"
+          }
+        ]
+      }
+    }
+  }
+}
