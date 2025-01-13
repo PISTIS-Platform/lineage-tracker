@@ -1,4 +1,6 @@
-**Remark:** This repo contains the code of the Lineage Tracker Backend, the documentation section however refers to to it as a whole (including the UI).
+# PISTIS Lineage Tracker
+
+The Lineage Tracker is based on the Provenance Engine, which was originally developed for XMANAI EU project. It tracks CRUD operations performed on (meta-)datasets and thereby constructs data-lineages, representing the life line of individual datasets and giving insights into WHO performed WHAT action on WHICH VERSION of WHICH DATASET and WHEN. The emerging lineage tree is constructed in RDF format according to the [W3C Prov Ontology](https://www.w3.org/TR/prov-o/) and stored in a Virtuoso Triple Store. The stored Lineage Information is processed and is provided in a structured format via the respective endpoints. A UI, which is supposed to visualize this lineage information is in development.
 
 # Setup
 
@@ -9,13 +11,6 @@ Tracking CRUD operation and storing them as linked data in the context of PISTIS
 docker build -t lineage-tracker .
 
 docker-compose up
-
-# Documentation 
-
-## Summary
-
-The Lineage Tracker is based on the Provenance Engine, which was originally developed for XMANAI EU project. It tracks CRUD operations performed on (meta-)datasets and thereby constructs data-lineages, representing the life line of individual datasets and giving insights into WHO performed WHAT action on WHICH VERSION of WHICH DATASET and WHEN. The emerging lineage tree is constructed in RDF format according to the [W3C Prov Ontology](https://www.w3.org/TR/prov-o/) and stored in a Virtuoso Triple Store. The stored Lineage Information is processed and is provided in a structured format via the respective endpoints. A UI, which is supposed to visualize this lineage information is in development.
-
 
 ## Working Deployment
 
@@ -75,6 +70,11 @@ The different use cases within the PISTIS platform are depicted in the sequence 
 
 ![SQ6](documentation/images/SQ_version_diff.png)
 
+## License
+
+***
+
+[Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 
 
