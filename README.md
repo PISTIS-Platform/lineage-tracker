@@ -27,7 +27,7 @@ The system provides a user-friendly user interface (UI) with two primary pages. 
 
 The overall lineage tracker architecture can be seen in the figure below.
 
-<img src="documentation/images/architecture-lt.png" alt="Lineage Tracker Architecture" style="width: 50%;">
+<img src="documentation/images/architecture-lt.png" alt="Lineage Tracker Architecture" style="width: 70%;">
 
 ## Getting Started
 
